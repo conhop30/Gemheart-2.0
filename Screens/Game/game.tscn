@@ -1,0 +1,164 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw7puf3jsxgly"]
+
+[ext_resource type="Script" path="res://Screens/Game/game.gd" id="1_tm6v3"]
+[ext_resource type="Texture2D" uid="uid://d0iwobl2gc1r1" path="res://Assets/gemheartBoardBeta.png" id="2_e1c7f"]
+[ext_resource type="Script" path="res://Shared/deck.gd" id="3_30u8r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqk7p"]
+size = Vector2(612, 83)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_tm6v3")
+
+[node name="Board" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.002
+anchor_bottom = 1.0
+offset_right = -0.304077
+offset_bottom = 2.0
+
+[node name="Background" type="TextureRect" parent="Board"]
+layout_mode = 2
+anchor_right = 0.997
+anchor_bottom = 0.998
+offset_right = -0.538086
+offset_bottom = 0.299988
+texture = ExtResource("2_e1c7f")
+
+[node name="HealthNorth" type="Label" parent="Board"]
+layout_mode = 2
+anchor_left = 0.039
+anchor_top = 0.378
+anchor_right = 0.085
+anchor_bottom = 0.457
+offset_left = -0.00600052
+offset_top = 0.299988
+offset_right = -0.090004
+offset_bottom = -0.0500183
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthSouth" type="Label" parent="Board"]
+layout_mode = 2
+anchor_left = 0.034
+anchor_top = 0.526
+anchor_right = 0.08
+anchor_bottom = 0.605
+offset_left = -0.236004
+offset_top = 0.0999756
+offset_right = -0.320007
+offset_bottom = -0.25
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeckNorth" type="Container" parent="Board"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = 0.049
+anchor_right = 0.101
+anchor_bottom = 0.176
+offset_left = -20.772
+offset_top = -31.85
+offset_right = -116.554
+offset_bottom = -114.4
+script = ExtResource("3_30u8r")
+
+[node name="DeckSouth" type="Container" parent="Board"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019
+anchor_top = 0.805
+anchor_right = 0.096
+anchor_bottom = 0.932
+offset_left = -21.926
+offset_top = -523.25
+offset_right = -110.784
+offset_bottom = -605.8
+script = ExtResource("3_30u8r")
+
+[node name="ActionButton" type="Button" parent="Board"]
+layout_mode = 0
+offset_left = 1011.0
+offset_top = 272.0
+offset_right = 1127.0
+offset_bottom = 337.0
+text = "DEFAULT TEXT"
+
+[node name="ResourcesNorth" type="Label" parent="Board"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.666
+anchor_top = 0.049
+anchor_right = 0.85
+anchor_bottom = 0.183
+offset_left = 0.435974
+offset_top = 0.149998
+offset_right = 0.0999756
+offset_bottom = 0.0499878
+text = "DEFAULT RESOURCES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResourcesSouth" type="Label" parent="Board"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.666
+anchor_top = 0.803
+anchor_right = 0.848
+anchor_bottom = 0.937
+offset_left = -1.56403
+offset_top = 0.0499878
+offset_right = 0.407959
+offset_bottom = -0.0500488
+text = "DEFAULT RESOURCES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BenchNorth" type="Area2D" parent="Board"]
+position = Vector2(444, 81)
+metadata/_edit_group_ = true
+
+[node name="BenchNorthCollision" type="CollisionShape2D" parent="Board/BenchNorth"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="BenchSouth" type="Area2D" parent="Board"]
+position = Vector2(445, 567)
+metadata/_edit_group_ = true
+
+[node name="BenchSouthCollision" type="CollisionShape2D" parent="Board/BenchSouth"]
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="RampNorth" type="Area2D" parent="Board"]
+position = Vector2(446, 180)
+metadata/_edit_group_ = true
+
+[node name="RampNorthCollision" type="CollisionShape2D" parent="Board/RampNorth"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="RampSouth" type="Area2D" parent="Board"]
+position = Vector2(446, 476)
+metadata/_edit_group_ = true
+
+[node name="RampSouthCollision" type="CollisionShape2D" parent="Board/RampSouth"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="RampEcoNorth" type="Area2D" parent="Board"]
+position = Vector2(1076, 177)
+
+[node name="RampEcoNorthCollision" type="CollisionShape2D" parent="Board/RampEcoNorth"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="RampEcoSouth" type="Area2D" parent="Board"]
+position = Vector2(1077, 476)
+metadata/_edit_group_ = true
+
+[node name="RampEcoNorthCollision" type="CollisionShape2D" parent="Board/RampEcoSouth"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
