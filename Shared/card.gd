@@ -6,7 +6,7 @@ CARD
 	- Provide how a given card can interact with others
 """
 
-extends Node
+extends Sprite2D
 
 const Keywords = preload("res://Shared/keywords.gd")
 const Sources  = preload("res://Shared/sources.gd" )
@@ -21,9 +21,8 @@ var _keywords = Keywords.Keywords.EMPTY
 var _source   = Sources.Sources.NONE
 var _effect   # Effect
 var _art      # Generated in _ready()
-
-var dragging = false      # Draggin section
-var offset = Vector2.ZERO
+var _pile
+var _piles = []
 
 """ METHODS """
 ##########################
@@ -46,20 +45,24 @@ func set_health(new_health):
 	_health = new_health
 func set_keywords(new_keywords):
 	_keywords = new_keywords
+func set_pile(new_pile):
+	_pile = new_pile
 
 # Called when the node enters the scene tree for the first time.
 # TODO - QUESTION: Would this act as a constructor?
 func _ready() -> void:
-	# Generate the art
-	#_art = $Art
-	#var _art_load = load("res://Assets/filler.jpg").get_data()
-	#_art.create_from_image(_art_load)
-	pass
+	init_card()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # TODO - QUESTION: Use this for drawing effects?
 func _process(delta: float) -> void:
 	pass
+
+func init_card():
+	pass
+
+func possible_piles():
+	return _piles
 
 # Checks living condition
 func is_dead():
@@ -68,24 +71,6 @@ func is_dead():
 	else:
 		_health = 0
 		return true
-
-# Dragging a card
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				var global_mouse_position = get_global_mouse_position()
-				if (global_mouse_position  - global_position).length <= texture.get_size().length() / 2:
-					dragging = true
-					offset = global_position - global_mouse_position
-				else:
-					dragging = false
-	elif event is InputEventMouseMotion and dragging:
-		global_position = get_global_mouse_position() + offset
-
-# The card hits something
-func strike():
-	pass
 
 # Activate the card's effect
 func effect():

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw7puf3jsxgly"]
+[gd_scene load_steps=7 format=3 uid="uid://bw7puf3jsxgly"]
 
 [ext_resource type="Script" path="res://Screens/Game/game.gd" id="1_tm6v3"]
 [ext_resource type="Texture2D" uid="uid://d0iwobl2gc1r1" path="res://Assets/gemheartBoardBeta.png" id="2_e1c7f"]
+[ext_resource type="Script" path="res://Shared/player.gd" id="3_5beh6"]
 [ext_resource type="Script" path="res://Shared/deck.gd" id="3_30u8r"]
+[ext_resource type="Script" path="res://Shared/pile.gd" id="4_eqtxn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqk7p"]
 size = Vector2(612, 83)
@@ -25,40 +27,6 @@ offset_right = -0.538086
 offset_bottom = 0.299988
 texture = ExtResource("2_e1c7f")
 
-[node name="HealthNorth" type="Label" parent="Board"]
-layout_mode = 2
-anchor_left = 0.039
-anchor_top = 0.378
-anchor_right = 0.085
-anchor_bottom = 0.457
-offset_left = -0.00600052
-offset_top = 0.299988
-offset_right = -0.090004
-offset_bottom = -0.0500183
-text = "99"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealthSouth" type="Label" parent="Board"]
-layout_mode = 2
-anchor_left = 0.034
-anchor_top = 0.526
-anchor_right = 0.08
-anchor_bottom = 0.605
-offset_left = -0.236004
-offset_top = 0.0999756
-offset_right = -0.320007
-offset_bottom = -0.25
-text = "99"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DeckNorth" type="Node2D" parent="Board"]
-script = ExtResource("3_30u8r")
-
-[node name="DeckSouth" type="Node2D" parent="Board"]
-script = ExtResource("3_30u8r")
-
 [node name="ActionButton" type="Button" parent="Board"]
 layout_mode = 0
 offset_left = 1011.0
@@ -67,79 +35,123 @@ offset_right = 1127.0
 offset_bottom = 337.0
 text = "DEFAULT TEXT"
 
-[node name="ResourcesNorth" type="Label" parent="Board"]
-layout_mode = 1
+[node name="HealthNorth" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.039
+anchor_top = 0.378
+anchor_right = 0.085
+anchor_bottom = 0.457
+offset_left = 0.0719948
+offset_top = 1.05598
+offset_right = -0.0120087
+offset_bottom = 0.705994
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerNorth" type="Node2D" parent="."]
+script = ExtResource("3_5beh6")
+
+[node name="Bench" type="Area2D" parent="PlayerNorth"]
+position = Vector2(444, 81)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Bench"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="Ramp" type="Area2D" parent="PlayerNorth"]
+position = Vector2(446, 180)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Ramp"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="RampEcoNorth" type="Area2D" parent="PlayerNorth"]
+position = Vector2(1076, 177)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/RampEcoNorth"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="ResourcesNorth" type="Label" parent="PlayerNorth"]
 anchors_preset = -1
 anchor_left = 0.666
 anchor_top = 0.049
 anchor_right = 0.85
 anchor_bottom = 0.183
-offset_left = 0.435974
-offset_top = 0.149998
-offset_right = 0.0999756
-offset_bottom = 0.0499878
+offset_left = 769.0
+offset_top = 32.0
+offset_right = 934.0
+offset_bottom = 55.0
 text = "DEFAULT RESOURCES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResourcesSouth" type="Label" parent="Board"]
-layout_mode = 1
+[node name="Deck" type="Node2D" parent="PlayerNorth"]
+script = ExtResource("3_30u8r")
+
+[node name="PlayerSouth" type="Node2D" parent="."]
+script = ExtResource("3_5beh6")
+
+[node name="Bench" type="Area2D" parent="PlayerSouth"]
+position = Vector2(445, 567)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Bench"]
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="Ramp" type="Area2D" parent="PlayerSouth"]
+position = Vector2(446, 476)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Ramp"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="RampEcoSouth" type="Area2D" parent="PlayerSouth"]
+position = Vector2(1077, 476)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/RampEcoSouth"]
+position = Vector2(1, -5.5)
+shape = SubResource("RectangleShape2D_bqk7p")
+
+[node name="ResourcesSouth" type="Label" parent="PlayerSouth"]
 anchors_preset = -1
 anchor_left = 0.666
 anchor_top = 0.803
 anchor_right = 0.848
 anchor_bottom = 0.937
-offset_left = -1.56403
-offset_top = 0.0499878
-offset_right = 0.407959
-offset_bottom = -0.0500488
+offset_left = 767.0
+offset_top = 522.0
+offset_right = 932.0
+offset_bottom = 545.0
 text = "DEFAULT RESOURCES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BenchNorth" type="Area2D" parent="Board"]
-position = Vector2(444, 81)
-metadata/_edit_group_ = true
+[node name="HealthSouth" type="Label" parent="PlayerSouth"]
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.526
+anchor_right = 0.08
+anchor_bottom = 0.605
+offset_left = 39.0
+offset_top = 342.0
+offset_right = 58.0
+offset_bottom = 365.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BenchNorthCollision" type="CollisionShape2D" parent="Board/BenchNorth"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="BenchSouth" type="Area2D" parent="Board"]
-position = Vector2(445, 567)
-metadata/_edit_group_ = true
-
-[node name="BenchSouthCollision" type="CollisionShape2D" parent="Board/BenchSouth"]
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="RampNorth" type="Area2D" parent="Board"]
-position = Vector2(446, 180)
-metadata/_edit_group_ = true
-
-[node name="RampNorthCollision" type="CollisionShape2D" parent="Board/RampNorth"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="RampSouth" type="Area2D" parent="Board"]
-position = Vector2(446, 476)
-metadata/_edit_group_ = true
-
-[node name="RampSouthCollision" type="CollisionShape2D" parent="Board/RampSouth"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="RampEcoNorth" type="Area2D" parent="Board"]
-position = Vector2(1076, 177)
-metadata/_edit_group_ = true
-
-[node name="RampEcoNorthCollision" type="CollisionShape2D" parent="Board/RampEcoNorth"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="RampEcoSouth" type="Area2D" parent="Board"]
-position = Vector2(1077, 476)
-metadata/_edit_group_ = true
-
-[node name="RampEcoNorthCollision" type="CollisionShape2D" parent="Board/RampEcoSouth"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
+[node name="Deck" type="Node2D" parent="PlayerSouth"]
+script = ExtResource("3_30u8r")
