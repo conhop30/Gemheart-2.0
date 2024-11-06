@@ -3,9 +3,9 @@ DECK
 	Container for cards with interactive elements.
 """
 
-extends Node
+extends Node2D
 
-var card = preload("res://Shared/card.tscn")
+@onready var card_load = load("res://Shared/card.tscn")
 
 """ ATTRIBUTES """
 var deck = []
@@ -18,10 +18,14 @@ func get_deck():
 	return deck
 
 func generate_deck():
-	for card in range(0, 60, 1):
-		deck.append(card)
-	# TESTING: DELETE ME
-	print("We added card #" + str(card))
+	for cards in range(0, 60, 1):
+		var card = card_load.instantiate()
+		get_tree().root.add_child.call_deferred(card)
+		# TESTING: DELETE ME
+		print("We added card #" + str(card))
+
+func add_card(card):
+	deck.append(card)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
