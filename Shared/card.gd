@@ -75,7 +75,7 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				var global_mouse_position = get_global_mouse_position()
-				if (global_mouse_position - global_position).length <= texture.get_size().length() / 2:
+				if (global_mouse_position  - global_position).length <= texture.get_size().length() / 2:
 					dragging = true
 					offset = global_position - global_mouse_position
 				else:
