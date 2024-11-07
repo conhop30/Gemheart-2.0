@@ -4,7 +4,8 @@ Responsible for controlling card movement.
 """
 
 extends Node2D
- 
+class_name Player
+
 # References to the child nodes representing each pile
 @onready var bench = $Bench
 @onready var ramp = $Ramp
@@ -15,6 +16,9 @@ var original_pile = null  # Store the original pile the card came from
 var is_dragging = false   # Track if the player is currently dragging a card
 var turn_active = true 
 
+func _ready():
+	pass
+	
 func _input(event):
 	if turn_active:  # Only respond to input if it's this player's turn
 		if event is InputEventMouseButton:
@@ -26,6 +30,17 @@ func _input(event):
 			# Update card position while dragging
 			on_mouse_drag(event)
  
+func activate():
+	turn_active = true
+	
+func deactivate():
+	turn_active = false
+	
+func init_player():
+	for child in get_children():
+		if is_instance_of(child, Pile):
+			child.init_pile()
+	
 func on_mouse_down(event):
 	# Check if we're pressing on a card to start dragging
 	var mouse_position = get_global_mouse_position()
@@ -60,7 +75,7 @@ func on_mouse_up():
 		else:
 			print("No valid target pile or same pile selected")
 		# Reset dragging state and selection after moving
-		selected_card.stop_dragging()  # Optional: reset appearance
+		#selected_card.stop_dragging()  # Optional: reset appearance
 		selected_card = null
 		original_pile = null
 		is_dragging   = false

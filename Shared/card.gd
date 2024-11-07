@@ -7,6 +7,7 @@ CARD
 """
 
 extends Sprite2D
+class_name Card
 
 const Keywords = preload("res://Shared/keywords.gd")
 const Sources  = preload("res://Shared/sources.gd" )
@@ -21,8 +22,8 @@ var _keywords = Keywords.Keywords.EMPTY
 var _source   = Sources.Sources.NONE
 var _effect   # Effect
 var _art      # Generated in _ready()
-var _pile
-var _piles = []
+var _pile = "Bench"
+var _piles = ["Bench",]
 
 """ METHODS """
 ##########################
@@ -75,3 +76,9 @@ func is_dead():
 # Activate the card's effect
 func effect():
 	pass
+	
+func start_dragging():
+	if _pile == "Bench":
+		_piles = ["Ramp"]		
+	elif _pile == "Ramp":
+		_piles = ["Bench"]

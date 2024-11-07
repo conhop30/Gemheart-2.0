@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Screens/Game/game.gd" id="1_tm6v3"]
 [ext_resource type="Texture2D" uid="uid://d0iwobl2gc1r1" path="res://Assets/gemheartBoardBeta.png" id="2_e1c7f"]
 [ext_resource type="Script" path="res://Shared/player.gd" id="3_5beh6"]
-[ext_resource type="Script" path="res://Shared/deck.gd" id="3_30u8r"]
+[ext_resource type="Script" path="res://Screens/Game/action_button.gd" id="3_kaue4"]
 [ext_resource type="Script" path="res://Shared/pile.gd" id="4_eqtxn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqk7p"]
@@ -34,6 +34,7 @@ offset_top = 272.0
 offset_right = 1127.0
 offset_bottom = 337.0
 text = "DEFAULT TEXT"
+script = ExtResource("3_kaue4")
 
 [node name="HealthNorth" type="Label" parent="."]
 anchors_preset = -1
@@ -52,19 +53,17 @@ vertical_alignment = 1
 [node name="PlayerNorth" type="Node2D" parent="."]
 script = ExtResource("3_5beh6")
 
-[node name="Bench" type="Area2D" parent="PlayerNorth"]
+[node name="Bench" type="Node2D" parent="PlayerNorth"]
 position = Vector2(444, 81)
 script = ExtResource("4_eqtxn")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Bench"]
 position = Vector2(1, -5.5)
 shape = SubResource("RectangleShape2D_bqk7p")
 
-[node name="Ramp" type="Area2D" parent="PlayerNorth"]
+[node name="Ramp" type="Node2D" parent="PlayerNorth"]
 position = Vector2(446, 180)
 script = ExtResource("4_eqtxn")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Ramp"]
 position = Vector2(1, -5.5)
@@ -73,7 +72,6 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="RampEcoNorth" type="Area2D" parent="PlayerNorth"]
 position = Vector2(1076, 177)
 script = ExtResource("4_eqtxn")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/RampEcoNorth"]
 position = Vector2(1, -5.5)
@@ -94,23 +92,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Deck" type="Node2D" parent="PlayerNorth"]
-script = ExtResource("3_30u8r")
+script = ExtResource("4_eqtxn")
 
 [node name="PlayerSouth" type="Node2D" parent="."]
 script = ExtResource("3_5beh6")
 
-[node name="Bench" type="Area2D" parent="PlayerSouth"]
+[node name="Bench" type="Node2D" parent="PlayerSouth"]
 position = Vector2(445, 567)
 script = ExtResource("4_eqtxn")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Bench"]
 shape = SubResource("RectangleShape2D_bqk7p")
 
-[node name="Ramp" type="Area2D" parent="PlayerSouth"]
+[node name="Ramp" type="Node2D" parent="PlayerSouth"]
 position = Vector2(446, 476)
 script = ExtResource("4_eqtxn")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Ramp"]
 position = Vector2(1, -5.5)
@@ -119,7 +115,6 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="RampEcoSouth" type="Area2D" parent="PlayerSouth"]
 position = Vector2(1077, 476)
 script = ExtResource("4_eqtxn")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/RampEcoSouth"]
 position = Vector2(1, -5.5)
@@ -154,4 +149,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Deck" type="Node2D" parent="PlayerSouth"]
-script = ExtResource("3_30u8r")
+script = ExtResource("4_eqtxn")
+
+[connection signal="pressed" from="Board/ActionButton" to="Board/ActionButton" method="_on_pressed"]

@@ -4,29 +4,40 @@ PILE
 	Specifically, accepting and rejecting cards.
 """
 
-extends Area2D
+extends Node2D
+class_name Pile
 
 """ CONSTANTS """
 var MAX_SIZE = 6
 @onready var collision_shape = $CollisionShape2D
+@onready var card_scene = load("res://Shared/card.tscn")
 
 """ ATTRIBUTES """
-var pile = []
-# Set allowed card types if this pile has restrictions
-var allowed_card_types = []
 
 """ METHODS """
 func _ready() -> void:
-	pass
+	print("Pile's global_position in _ready:", global_position)
+	print("Pile's global_transform.origin in _ready:", global_transform.origin)
+	print("Pile's name is", name)
 
 func _process(delta: float) -> void:
 	pass
 
+func init_pile():
+	
+	var start_position = global_position + Vector2(8, 8)
+	var offset = Vector2(96, 0) # size of card?
+	
+	for cards in range(0, 10, 1):
+		var card = card_scene.instantiate()
+		add_card(card)
+		card.position = start_position + offset * cards
+		
+	
 func pile_size() -> int:
-	return pile.size()
+	return self.get_child_count()
 
 func add_card(card: Sprite2D):
-	# Add the card as a child of the pile if allowed
 	if can_accept_card(card):
 		add_child(card)
 		card.set_pile(self.name)
@@ -35,12 +46,9 @@ func add_card(card: Sprite2D):
 	else:
 		print("Pile:", self.name, "cannot accept card:", card.name)
 
-func can_accept_card(card: Node) -> bool:
-	# Check if the card can be added based on allowed types
-	if allowed_card_types.empty():
-		return true  # Accept any card if no restrictions
-	return true
-
+func can_accept_card(card: Card) -> bool:
+	return card._piles.has(self.name)
+	
 func get_stack_position() -> Vector2:
 	# Calculate a new position for stacking cards
 	var offset = Vector2(randf() * 5, randf() * 5)
@@ -52,17 +60,21 @@ func remove_card(card: Node2D):
 		remove_child(card)
 		print("Removed card:", card.name, "from pile:", self.name)
 
-func get_card_at_position(position: Vector2) -> Node:
+func get_card_at_position(given_position: Vector2) -> Node:
 	# Return the topmost card at the given position within the pile
-	for card in $root.get_children():
-		if card.global_position.distance_to(position) < card.size:
-			return card
+	for child in get_children():
+		var is_card = is_instance_of(child, Card)
+		
+		#var clicked_card = child.global_position.distance_to(given_position) < child.region_rect.size
+		if is_card and child.global_position.distance_to(given_position) < 32:
+			print(child.name)
+			return child
 	return null
 
 func get_global_rect() -> Rect2:
 	# Calculate the global bounds of the pile using the collision shape
-	var shape = collision_shape.shape
-	if shape is RectangleShape2D:
+	var shape = collision_shape.shape if collision_shape != null else null
+	if shape and shape is RectangleShape2D:
 		return Rect2(global_position - shape.extents, shape.extents * 2)
 	return Rect2()  # Adjust as needed if using a different shape type
  

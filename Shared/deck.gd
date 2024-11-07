@@ -4,6 +4,7 @@ DECK
 """
 
 extends Node2D
+class_name Deck
 
 @onready var card_load = load("res://Shared/card.tscn")
 
