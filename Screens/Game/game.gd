@@ -3,11 +3,13 @@ extends Node
 @onready var deck_load = load("res://Shared/deck.tscn")
 @onready var deck = deck_load.instantiate()
 @onready var card_load = load("res://Shared/card.tscn")
+@onready var button = $Board/ActionButton
 
 var current_player: String = "PlayerNorth"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Start the first player's turn
 	for child in get_children():
 		if is_instance_of(child, Player):
 			child.init_player()
@@ -17,9 +19,12 @@ func _ready() -> void:
 			else:
 				child.deactivate()
 	
+	# Set the action button's text
+	button.text = "Player North's turn"
+	
 	# more setup code for signals
 	EventBus.subscribe("player_passed", self, "on_turn_passed")
-			
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -39,15 +44,22 @@ func on_turn_committed() -> void:
 	pass
 
 func on_turn_passed() -> void:
-	#TODO: use modulo instead of this crappy way
+	# Toggle the current player
 	current_player = "PlayerSouth" if current_player == "PlayerNorth" else "PlayerNorth"
-		
+	
+	if current_player == "PlayerNorth":
+		button.text = "Player North's turn"
+	else:
+		button.text = "Player South's turn"
+
+	# Activate/deactivate players based on the new current player
 	for child in get_children():
-		if is_instance_of(child, Player):
+		if child is Player:
 			if child.name == current_player:
 				child.activate()
 			else:
 				child.deactivate()
+
 
 func on_round_start() -> void:
 	# Draw a card

@@ -7,14 +7,15 @@ extends Node2D
 class_name Player
 
 # References to the child nodes representing each pile
-@onready var bench = $Bench
-@onready var ramp = $Ramp
-@onready var deck = $Deck
+@onready var bench  = $Bench
+@onready var ramp   = $Ramp
+@onready var ground = $Ground
+@onready var deck   = $Deck
 
 var selected_card = null  # Store the currently selected card
 var original_pile = null  # Store the original pile the card came from
-var is_dragging = false   # Track if the player is currently dragging a card
-var turn_active = true 
+var is_dragging   = false # Track if the player is currently dragging a card
+var turn_active   = true 
 
 func _ready():
 	pass
@@ -32,15 +33,16 @@ func _input(event):
  
 func activate():
 	turn_active = true
-	
+
 func deactivate():
 	turn_active = false
-	
+
 func init_player():
 	for child in get_children():
 		if is_instance_of(child, Pile):
-			child.init_pile()
-	
+			if child.name == "Bench":
+				child.init_pile()
+
 func on_mouse_down(event):
 	# Check if we're pressing on a card to start dragging
 	var mouse_position = get_global_mouse_position()
