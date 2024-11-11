@@ -22,8 +22,8 @@ var _keywords = Keywords.Keywords.EMPTY
 var _source   = Sources.Sources.NONE
 var _effect   # Effect
 var _art      # Generated in _ready()
-var _pile = "Bench"
-var _piles = ["Bench", "Ramp", "Ground"]
+var _pile  = "Deck"
+var _piles = ["Bench", "Ramp", "RampEco", "Ground", "GroundEco", "Deck"]
 
 """ METHODS """
 ##########################
@@ -78,7 +78,13 @@ func effect():
 	pass
 	
 func start_dragging():
-	if _pile == "Bench":
-		_piles = ["Ramp"]
+	if _pile == "Deck":
+		_piles = ["Bench"]
+	elif _pile == "Bench":
+		_piles = ["Ramp", "RampEco"]
 	elif _pile == "Ramp":
-		_piles = ["Bench", "Ground"]
+		_piles = ["Bench", "Ground", "RampEco"]
+	elif _pile == "RampEco":
+		_piles = ["GroundEco", "Ground", "Ramp", "Bench"]
+	elif _pile == "Ground":
+		_piles = ["Ramp", "RampEco"]

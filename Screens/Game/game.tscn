@@ -1,13 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://bw7puf3jsxgly"]
+[gd_scene load_steps=12 format=3 uid="uid://bw7puf3jsxgly"]
 
 [ext_resource type="Script" path="res://Screens/Game/game.gd" id="1_tm6v3"]
 [ext_resource type="Texture2D" uid="uid://d0iwobl2gc1r1" path="res://Assets/gemheartBoardBeta.png" id="2_e1c7f"]
 [ext_resource type="Script" path="res://Shared/player.gd" id="3_5beh6"]
 [ext_resource type="Script" path="res://Screens/Game/action_button.gd" id="3_kaue4"]
+[ext_resource type="Texture2D" uid="uid://c02dequ70f1ir" path="res://Assets/action_button.PNG" id="4_3oe2m"]
 [ext_resource type="Script" path="res://Shared/pile.gd" id="4_eqtxn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2r4w7"]
+draw_center = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqk7p"]
 size = Vector2(612, 83)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ukit"]
+size = Vector2(97, 86)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gp6g"]
 size = Vector2(614.5, 95)
@@ -34,14 +41,27 @@ offset_bottom = 0.299988
 texture = ExtResource("2_e1c7f")
 
 [node name="ActionButton" type="Button" parent="Board"]
-layout_mode = 0
-offset_left = 1025.0
-offset_top = 263.0
-offset_right = 1116.0
-offset_bottom = 350.0
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.89
+anchor_top = 0.406
+anchor_right = 0.969
+anchor_bottom = 0.54
+offset_left = -0.280029
+offset_top = -0.0880127
+offset_right = -0.288086
+offset_bottom = 0.0799866
+theme_override_styles/normal = SubResource("StyleBoxFlat_2r4w7")
 text = "DEFAULT TEXT"
 autowrap_mode = 3
 script = ExtResource("3_kaue4")
+
+[node name="ActionButton" type="Sprite2D" parent="Board/ActionButton"]
+show_behind_parent = true
+position = Vector2(43, 43)
+scale = Vector2(0.154297, 0.138184)
+texture = ExtResource("4_3oe2m")
 
 [node name="PlayerNorth" type="Node2D" parent="."]
 script = ExtResource("3_5beh6")
@@ -70,9 +90,14 @@ script = ExtResource("4_eqtxn")
 position = Vector2(1, -5.5)
 shape = SubResource("RectangleShape2D_bqk7p")
 
-[node name="Deck" type="Node2D" parent="PlayerNorth"]
+[node name="Deck" type="Area2D" parent="PlayerNorth"]
 position = Vector2(65, 70)
 script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Deck"]
+position = Vector2(3.5, 4)
+shape = SubResource("RectangleShape2D_1ukit")
 
 [node name="Ground" type="Area2D" parent="PlayerNorth"]
 position = Vector2(373, 301)
@@ -150,9 +175,14 @@ metadata/_edit_group_ = true
 position = Vector2(1, -5.5)
 shape = SubResource("RectangleShape2D_bqk7p")
 
-[node name="Deck" type="Node2D" parent="PlayerSouth"]
-position = Vector2(65, 561)
+[node name="Deck" type="Area2D" parent="PlayerSouth"]
+position = Vector2(60, 558)
 script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Deck"]
+position = Vector2(3.5, 4)
+shape = SubResource("RectangleShape2D_1ukit")
 
 [node name="Ground" type="Area2D" parent="PlayerSouth"]
 position = Vector2(374, 398)

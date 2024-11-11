@@ -40,7 +40,7 @@ func deactivate():
 func init_player():
 	for child in get_children():
 		if is_instance_of(child, Pile):
-			if child.name == "Bench":
+			if child.name == "Deck":
 				child.init_pile()
 
 func on_mouse_down(event):
@@ -84,7 +84,7 @@ func on_mouse_up():
  
 func _get_pile_at_position(position: Vector2) -> Node:
 	# Iterate over each pile and check if the card overlaps it
-	for pile in [bench, ramp, deck]:
+	for pile in [bench, ramp, deck, ground]:
 		if pile.get_global_rect().has_point(position):
 			return pile
 	return null

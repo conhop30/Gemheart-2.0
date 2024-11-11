@@ -26,12 +26,12 @@ func _process(delta: float) -> void:
 func init_pile():
 	
 	var start_position = global_position
-	var offset = Vector2(96, 0) # size of card?
+	#var offset = Vector2(96, 0) # size of card?
 	
 	for cards in range(0, 10, 1):
 		var card = card_scene.instantiate()
 		add_card(card)
-		card.position = start_position + offset * cards
+		card.position = start_position # + offset * cards
 
 func pile_size() -> int:
 	return self.get_child_count()

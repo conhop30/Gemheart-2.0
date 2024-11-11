@@ -1,9 +1,13 @@
 extends Node
 
-@onready var deck_load = load("res://Shared/deck.tscn")
-@onready var deck = deck_load.instantiate()
-@onready var card_load = load("res://Shared/card.tscn")
-@onready var button = $Board/ActionButton
+@onready var deck_load     = load("res://Shared/deck.tscn")
+@onready var deck          = deck_load.instantiate()
+@onready var card_load     = load("res://Shared/card.tscn")
+@onready var action_button = $Board/ActionButton
+@onready var healthNorth   = $PlayerNorth/HealthNorth
+@onready var healthSouth   = $PlayerSouth/HealthSouth
+
+const STARTING_HEALTH = 20
 
 var current_player: String = "PlayerNorth"
 
@@ -19,8 +23,11 @@ func _ready() -> void:
 			else:
 				child.deactivate()
 	
+	# Set the player health displays
+	healthNorth.text = str(STARTING_HEALTH)
+	healthSouth.text = str(STARTING_HEALTH)
 	# Set the action button's text
-	button.text = "Player North's turn"
+	action_button.text = "Player North's turn"
 	
 	# more setup code for signals
 	EventBus.subscribe("player_passed", self, "on_turn_passed")
@@ -48,9 +55,9 @@ func on_turn_passed() -> void:
 	current_player = "PlayerSouth" if current_player == "PlayerNorth" else "PlayerNorth"
 	
 	if current_player == "PlayerNorth":
-		button.text = "Player North's turn"
+		action_button.text = "Player North's turn"
 	else:
-		button.text = "Player South's turn"
+		action_button.text = "Player South's turn"
 
 	# Activate/deactivate players based on the new current player
 	for child in get_children():
