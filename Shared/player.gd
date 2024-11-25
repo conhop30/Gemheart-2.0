@@ -11,6 +11,9 @@ class_name Player
 @onready var ramp   = $Ramp
 @onready var ground = $Ground
 @onready var deck   = $Deck
+@onready var hand   = $Hand
+@onready var rampEco   = $RampEco
+@onready var groundEco = $GroundEco
 
 var selected_card = null  # Store the currently selected card
 var original_pile = null  # Store the original pile the card came from
@@ -40,8 +43,8 @@ func deactivate():
 func init_player():
 	for child in get_children():
 		if is_instance_of(child, Pile):
-			if child.name == "Deck":
-				child.init_pile()
+			print("INSIDE IF STATEMENT")
+			child.init_pile()
 
 func on_mouse_down(event):
 	# Check if we're pressing on a card to start dragging
@@ -69,7 +72,7 @@ func on_mouse_up():
 		if target_pile and target_pile != original_pile:
 			if target_pile.can_accept_card(selected_card):
 				original_pile.remove_card(selected_card)
-				target_pile.add_card(selected_card)
+				target_pile.add_card_to_pile(selected_card)
 				selected_card.set_pile(target_pile.name)
 				print("Dropped card:", selected_card.name, "onto pile:", target_pile.name)
 			else:
@@ -84,7 +87,7 @@ func on_mouse_up():
  
 func _get_pile_at_position(position: Vector2) -> Node:
 	# Iterate over each pile and check if the card overlaps it
-	for pile in [bench, ramp, deck, ground]:
+	for pile in [deck, hand, bench, ramp, ground, groundEco, rampEco]:
 		if pile.get_global_rect().has_point(position):
 			return pile
 	return null

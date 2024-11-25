@@ -1,18 +1,24 @@
 extends Node
 
-@onready var deck_load     = load("res://Shared/deck.tscn")
-@onready var deck          = deck_load.instantiate()
+@onready var nDeck     = $PlayerNorth/Deck
+@onready var sDeck     = $PlayerSouth/Deck
 @onready var card_load     = load("res://Shared/card.tscn")
 @onready var action_button = $Board/ActionButton
-@onready var healthNorth   = $PlayerNorth/HealthNorth
-@onready var healthSouth   = $PlayerSouth/HealthSouth
+@onready var nHealth   = $PlayerNorth/HealthNorth
+@onready var sHealth   = $PlayerSouth/HealthSouth
+@onready var nResource = $PlayerNorth/ResourcesNorth
+@onready var sResource = $PlayerSouth/ResourcesSouth
+@onready var nHand     = $PlayerNorth/Hand
+@onready var sHand     = $PlayerSouth/Hand
+const STARTING_HEALTH  = 20
 
-const STARTING_HEALTH = 20
-
+# TODO: Turn this into a rand() modulo
 var current_player: String = "PlayerNorth"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	init_board_values()
+	
 	# Start the first player's turn
 	for child in get_children():
 		if is_instance_of(child, Player):
@@ -22,12 +28,6 @@ func _ready() -> void:
 				child.activate()
 			else:
 				child.deactivate()
-	
-	# Set the player health displays
-	healthNorth.text = str(STARTING_HEALTH)
-	healthSouth.text = str(STARTING_HEALTH)
-	# Set the action button's text
-	action_button.text = "Player North's turn"
 	
 	# more setup code for signals
 	EventBus.subscribe("player_passed", self, "on_turn_passed")
@@ -39,6 +39,16 @@ func _process(delta: float) -> void:
 # Setup players
 func init_game() -> void:
 	pass
+
+func init_board_values() -> void:
+	# Set the player health displays
+	nHealth.text = str(STARTING_HEALTH)
+	sHealth.text = str(STARTING_HEALTH)
+	# Set the action button's text
+	action_button.text = "Player North's turn"
+	# Set resource values
+	nResource.text = "1...2...3"
+	sResource.text = "1...2...3"
 
 # Ensure all necessary checks are made so the game is in a valid state
 # for the next player to take their turn.
@@ -70,6 +80,7 @@ func on_turn_passed() -> void:
 
 func on_round_start() -> void:
 	# Draw a card
+	
 	# Increase resource amount
 	# Set player active status (who starts the round)
 	pass
@@ -88,5 +99,3 @@ func current_player_turn() ->  void:
 # Reports if a player's health dropped to 0 or less
 func has_died() -> bool:
 	return false
-
-	

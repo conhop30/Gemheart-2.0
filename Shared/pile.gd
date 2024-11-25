@@ -1,6 +1,6 @@
 """
 PILE
-	Responbile for managing cards.
+	Responsible for managing cards.
 	Specifically, accepting and rejecting cards.
 """
 
@@ -8,11 +8,13 @@ extends Node2D
 class_name Pile
 
 """ CONSTANTS """
-var MAX_SIZE = 6
-@onready var collision_shape = $CollisionShape2D
-@onready var card_scene = load("res://Shared/card.tscn")
+var MAX_SIZE  = 6
+var PILE_SIZE = 6
+var DECK_SIZE = 40
 
 """ ATTRIBUTES """
+@onready var collision_shape = $CollisionShape2D
+@onready var card_scene = load("res://Shared/card.tscn")
 
 """ METHODS """
 func _ready() -> void:
@@ -24,19 +26,20 @@ func _process(delta: float) -> void:
 	pass
 
 func init_pile():
-	
 	var start_position = global_position
-	#var offset = Vector2(96, 0) # size of card?
 	
-	for cards in range(0, 10, 1):
+	for cards in range(0, DECK_SIZE, 1):
+		print("INSIDE INIT_DECK()")
 		var card = card_scene.instantiate()
-		add_card(card)
-		card.position = start_position # + offset * cards
+		add_card_to_pile(card)
+		card.position = start_position# + offset * cards
+	#var offset = Vector2(50, 0)
+	pass
 
 func pile_size() -> int:
 	return self.get_child_count()
 
-func add_card(card: Sprite2D):
+func add_card_to_pile(card: Sprite2D):
 	if can_accept_card(card):
 		add_child(card)
 		card.set_pile(self.name)
@@ -59,7 +62,6 @@ func get_card_at_position(given_position: Vector2) -> Node:
 	for child in get_children():
 		var is_card = is_instance_of(child, Card)
 		
-		#var clicked_card = child.global_position.distance_to(given_position) < child.region_rect.size
 		if is_card and child.global_position.distance_to(given_position) < 32:
 			print(child.name)
 			return child
@@ -70,5 +72,5 @@ func get_global_rect() -> Rect2:
 	var shape = collision_shape.shape if collision_shape != null else null
 	if shape and shape is RectangleShape2D:
 		return Rect2(global_position - shape.extents, shape.extents * 2)
-	return Rect2()  # Adjust as needed if using a different shape type
+	return Rect2()
  

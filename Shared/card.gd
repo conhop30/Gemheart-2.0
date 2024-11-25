@@ -23,7 +23,7 @@ var _source   = Sources.Sources.NONE
 var _effect   # Effect
 var _art      # Generated in _ready()
 var _pile  = "Deck"
-var _piles = ["Bench", "Ramp", "RampEco", "Ground", "GroundEco", "Deck"]
+var _piles = ["Deck"]
 
 """ METHODS """
 ##########################
@@ -79,12 +79,14 @@ func effect():
 	
 func start_dragging():
 	if _pile == "Deck":
+		_piles = ["Hand"]
+	elif _pile == "Hand":
 		_piles = ["Bench"]
 	elif _pile == "Bench":
 		_piles = ["Ramp", "RampEco"]
 	elif _pile == "Ramp":
 		_piles = ["Bench", "Ground", "RampEco"]
 	elif _pile == "RampEco":
-		_piles = ["GroundEco", "Ground", "Ramp", "Bench"]
+		_piles = ["Ground", "Ramp", "Bench"]
 	elif _pile == "Ground":
-		_piles = ["Ramp", "RampEco"]
+		_piles = ["GroundEco", "Ramp"]

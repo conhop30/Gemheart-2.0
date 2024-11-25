@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bw7puf3jsxgly"]
+[gd_scene load_steps=13 format=3 uid="uid://bw7puf3jsxgly"]
 
 [ext_resource type="Script" path="res://Screens/Game/game.gd" id="1_tm6v3"]
 [ext_resource type="Texture2D" uid="uid://d0iwobl2gc1r1" path="res://Assets/gemheartBoardBeta.png" id="2_e1c7f"]
@@ -21,6 +21,9 @@ size = Vector2(614.5, 95)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6253t"]
 size = Vector2(208, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvgnv"]
+size = Vector2(841, 70)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_tm6v3")
@@ -69,6 +72,7 @@ script = ExtResource("3_5beh6")
 [node name="Bench" type="Area2D" parent="PlayerNorth"]
 position = Vector2(444, 81)
 script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Bench"]
 position = Vector2(1, -5.5)
@@ -77,6 +81,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="Ramp" type="Area2D" parent="PlayerNorth"]
 position = Vector2(446, 180)
 script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Ramp"]
 position = Vector2(1, -5.5)
@@ -85,6 +90,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="RampEco" type="Area2D" parent="PlayerNorth"]
 position = Vector2(1076, 177)
 script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/RampEco"]
 position = Vector2(1, -5.5)
@@ -144,6 +150,15 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/GroundEco"]
 position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_6253t")
+
+[node name="Hand" type="Area2D" parent="PlayerNorth"]
+position = Vector2(190, -35)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Hand"]
+position = Vector2(367.5, 23)
+shape = SubResource("RectangleShape2D_dvgnv")
 
 [node name="PlayerSouth" type="Node2D" parent="."]
 position = Vector2(0, 1)
@@ -229,5 +244,14 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/GroundEco"]
 position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_6253t")
+
+[node name="Hand" type="Area2D" parent="PlayerSouth"]
+position = Vector2(189, 609)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Hand"]
+position = Vector2(368.25, 43.5)
+shape = SubResource("RectangleShape2D_dvgnv")
 
 [connection signal="pressed" from="Board/ActionButton" to="Board/ActionButton" method="_on_pressed"]
