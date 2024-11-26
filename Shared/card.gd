@@ -79,7 +79,7 @@ func effect():
 	
 func start_dragging():
 	if _pile == "Deck":
-		_piles = ["Hand"]
+		_piles = ["Hand", "Bench"]
 	elif _pile == "Hand":
 		_piles = ["Bench"]
 	elif _pile == "Bench":

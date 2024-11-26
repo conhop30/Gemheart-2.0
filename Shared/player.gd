@@ -76,8 +76,12 @@ func on_mouse_up():
 				selected_card.set_pile(target_pile.name)
 				print("Dropped card:", selected_card.name, "onto pile:", target_pile.name)
 			else:
+				# Move back to original pile
+				original_pile.arrange_cards()
 				print("Target pile cannot accept this card")
 		else:
+			# Move back to original pile
+			original_pile.arrange_cards()
 			print("No valid target pile or same pile selected")
 		# Reset dragging state and selection after moving
 		#selected_card.stop_dragging()  # Optional: reset appearance
@@ -85,6 +89,7 @@ func on_mouse_up():
 		original_pile = null
 		is_dragging   = false
  
+# TODO: Resolve pile recognition so that players can cross onto other's territory
 func _get_pile_at_position(position: Vector2) -> Node:
 	# Iterate over each pile and check if the card overlaps it
 	for pile in [deck, hand, bench, ramp, ground, groundEco, rampEco]:

@@ -7,6 +7,8 @@ PILE
 extends Node2D
 class_name Pile
 
+@export var isStacked = false # must be spread when true
+
 """ CONSTANTS """
 var MAX_SIZE  = 6
 var PILE_SIZE = 6
@@ -45,8 +47,22 @@ func add_card_to_pile(card: Sprite2D):
 		card.set_pile(self.name)
 		print("Added card:", card.name, "to pile:", self.name)
 		print("card.position = " + str(card.position))
+		# TODO: Reposition all cards in pile to proper formatting
+		arrange_cards()
 	else:
 		print("Pile:", self.name, "cannot accept card:", card.name)
+
+func arrange_cards():
+	var current_pos = self.global_position
+	var offset = Vector2(50, 0)
+	for child in get_children():
+		if is_instance_of(child, Card):
+			if isStacked:
+				child.global_position = self.global_position
+			else:
+				# Must be spreading
+				child.global_position = current_pos + offset
+				current_pos = child.global_position
 
 func can_accept_card(card: Card) -> bool:
 	return card._piles.has(self.name)

@@ -99,6 +99,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="Deck" type="Area2D" parent="PlayerNorth"]
 position = Vector2(65, 70)
 script = ExtResource("4_eqtxn")
+isStacked = true
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Deck"]
@@ -193,6 +194,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="Deck" type="Area2D" parent="PlayerSouth"]
 position = Vector2(60, 558)
 script = ExtResource("4_eqtxn")
+isStacked = true
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Deck"]
