@@ -31,7 +31,6 @@ func init_pile():
 	var start_position = global_position
 	
 	for cards in range(0, DECK_SIZE, 1):
-		print("INSIDE INIT_DECK()")
 		var card = card_scene.instantiate()
 		add_card_to_pile(card)
 		card.position = start_position# + offset * cards
@@ -54,7 +53,7 @@ func add_card_to_pile(card: Sprite2D):
 
 func arrange_cards():
 	var current_pos = self.global_position
-	var offset = Vector2(50, 0)
+	var offset      = Vector2(50, 0)
 	for child in get_children():
 		if is_instance_of(child, Card):
 			if isStacked:

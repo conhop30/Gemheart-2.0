@@ -1,0 +1,13 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://i63eqyegwvex"]
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_njt24"]
+resource_name = "Distortion"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_htfe8"]
+resource_name = "Reverb"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectDistortion_njt24")
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectReverb_htfe8")
+bus/0/effect/1/enabled = false

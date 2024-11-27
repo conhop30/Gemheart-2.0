@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bw7puf3jsxgly"]
+[gd_scene load_steps=14 format=3 uid="uid://bw7puf3jsxgly"]
 
 [ext_resource type="Script" path="res://Screens/Game/game.gd" id="1_tm6v3"]
 [ext_resource type="Texture2D" uid="uid://d0iwobl2gc1r1" path="res://Assets/gemheartBoardBeta.png" id="2_e1c7f"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Screens/Game/action_button.gd" id="3_kaue4"]
 [ext_resource type="Texture2D" uid="uid://c02dequ70f1ir" path="res://Assets/action_button.PNG" id="4_3oe2m"]
 [ext_resource type="Script" path="res://Shared/pile.gd" id="4_eqtxn"]
+[ext_resource type="Script" path="res://Screens/Game/settings.gd" id="7_vpc07"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2r4w7"]
 draw_center = false
@@ -62,7 +63,7 @@ script = ExtResource("3_kaue4")
 
 [node name="ActionButton" type="Sprite2D" parent="Board/ActionButton"]
 show_behind_parent = true
-position = Vector2(43, 43)
+position = Vector2(38.2202, 42.188)
 scale = Vector2(0.154297, 0.138184)
 texture = ExtResource("4_3oe2m")
 
@@ -107,7 +108,7 @@ position = Vector2(3.5, 4)
 shape = SubResource("RectangleShape2D_1ukit")
 
 [node name="Ground" type="Area2D" parent="PlayerNorth"]
-position = Vector2(373, 301)
+position = Vector2(374, 295)
 script = ExtResource("4_eqtxn")
 metadata/_edit_group_ = true
 
@@ -153,7 +154,7 @@ position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_6253t")
 
 [node name="Hand" type="Area2D" parent="PlayerNorth"]
-position = Vector2(190, -35)
+position = Vector2(191, -29)
 script = ExtResource("4_eqtxn")
 metadata/_edit_group_ = true
 
@@ -202,7 +203,7 @@ position = Vector2(3.5, 4)
 shape = SubResource("RectangleShape2D_1ukit")
 
 [node name="Ground" type="Area2D" parent="PlayerSouth"]
-position = Vector2(374, 398)
+position = Vector2(374, 399)
 script = ExtResource("4_eqtxn")
 metadata/_edit_group_ = true
 
@@ -248,7 +249,7 @@ position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_6253t")
 
 [node name="Hand" type="Area2D" parent="PlayerSouth"]
-position = Vector2(189, 609)
+position = Vector2(190, 608)
 script = ExtResource("4_eqtxn")
 metadata/_edit_group_ = true
 
@@ -256,4 +257,45 @@ metadata/_edit_group_ = true
 position = Vector2(368.25, 43.5)
 shape = SubResource("RectangleShape2D_dvgnv")
 
+[node name="Settings" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.861
+anchor_top = 0.005
+anchor_right = 0.995
+anchor_bottom = 0.117
+offset_left = 0.12793
+offset_top = -0.24
+offset_right = -0.240112
+offset_bottom = -1.816
+script = ExtResource("7_vpc07")
+
+[node name="TextureButton" type="TextureButton" parent="Settings"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings/TextureButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.925
+anchor_right = 1.0
+anchor_bottom = 1.55
+offset_left = 118.0
+offset_right = 30.0
+offset_bottom = -11.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TextureButton/MarginContainer"]
+layout_mode = 2
+
+[node name="volume" type="HSlider" parent="Settings/TextureButton/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -100.0
+rounded = true
+
+[node name="CheckBox" type="CheckBox" parent="Settings/TextureButton/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mute"
+
 [connection signal="pressed" from="Board/ActionButton" to="Board/ActionButton" method="_on_pressed"]
+[connection signal="value_changed" from="Settings/TextureButton/MarginContainer/VBoxContainer/volume" to="Settings" method="_on_volume_value_changed"]
+[connection signal="toggled" from="Settings/TextureButton/MarginContainer/VBoxContainer/CheckBox" to="Settings" method="_on_check_box_toggled"]

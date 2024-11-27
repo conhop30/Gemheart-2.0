@@ -17,7 +17,9 @@ var current_player: String = "PlayerNorth"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Initiate
 	init_board_values()
+	init_music()
 	
 	# Start the first player's turn
 	for child in get_children():
@@ -36,10 +38,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-# Setup players
-func init_game() -> void:
-	pass
-
 func init_board_values() -> void:
 	# Set the player health displays
 	nHealth.text = str(STARTING_HEALTH)
@@ -49,6 +47,20 @@ func init_board_values() -> void:
 	# Set resource values
 	nResource.text = "1...2...3"
 	sResource.text = "1...2...3"
+
+func init_music() -> void:
+	var bg_music = AudioStreamPlayer.new()
+	add_child(bg_music)
+	
+	# Load the audio stream
+	var audio_stream = load("res://Shared/Audio/Music/Sacrifice.ByTitanSlayer.mp3") as AudioStream
+	if audio_stream is AudioStreamMP3:  # Ensure it’s an AudioStream with a loop property
+		audio_stream.loop = true
+	
+	bg_music.stream = audio_stream
+	bg_music.volume_db = -20  # Adjust volume
+	bg_music.play()
+
 
 # Ensure all necessary checks are made so the game is in a valid state
 # for the next player to take their turn.

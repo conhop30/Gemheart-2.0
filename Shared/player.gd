@@ -43,7 +43,6 @@ func deactivate():
 func init_player():
 	for child in get_children():
 		if is_instance_of(child, Pile):
-			print("INSIDE IF STATEMENT")
 			child.init_pile()
 
 func on_mouse_down(event):
@@ -54,7 +53,7 @@ func on_mouse_down(event):
 		selected_card = pile.get_card_at_position(mouse_position)
 		if selected_card:
 			original_pile = pile
-			is_dragging = true  # Set dragging flag to true
+			is_dragging   = true  # Set dragging flag to true
 			selected_card.start_dragging()  # Optional: change appearance for dragging
 			print("Started dragging card:", selected_card.name, "from pile:", pile.name)
  
@@ -62,7 +61,6 @@ func on_mouse_drag(event):
 	# Update the selected card's position to follow the mouse
 	if selected_card:
 		selected_card.global_position = get_global_mouse_position()
-		print("Dragging card to position:", selected_card.global_position)
  
 func on_mouse_up():
 	# Check if we are releasing a dragged card
@@ -70,10 +68,20 @@ func on_mouse_up():
 		var mouse_position = get_global_mouse_position()
 		var target_pile = _get_pile_at_position(mouse_position)
 		if target_pile and target_pile != original_pile:
+			# Card placement
 			if target_pile.can_accept_card(selected_card):
 				original_pile.remove_card(selected_card)
 				target_pile.add_card_to_pile(selected_card)
 				selected_card.set_pile(target_pile.name)
+				
+				# Audio
+				var card_audio_placed = AudioStreamPlayer.new()
+				add_child(card_audio_placed)
+				card_audio_placed.stream = load("res://Shared/Audio/Effects/card_placed.mp3")
+				card_audio_placed.volume_db = -20 # -80 to 0, 0 being full volume
+				card_audio_placed.play()
+				
+				# Console
 				print("Dropped card:", selected_card.name, "onto pile:", target_pile.name)
 			else:
 				# Move back to original pile
@@ -83,6 +91,7 @@ func on_mouse_up():
 			# Move back to original pile
 			original_pile.arrange_cards()
 			print("No valid target pile or same pile selected")
+		
 		# Reset dragging state and selection after moving
 		#selected_card.stop_dragging()  # Optional: reset appearance
 		selected_card = null
