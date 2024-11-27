@@ -53,14 +53,18 @@ func init_music() -> void:
 	add_child(bg_music)
 	
 	# Load the audio stream
-	var audio_stream = load("res://Shared/Audio/Music/Sacrifice.ByTitanSlayer.mp3") as AudioStream
+	var audio_stream = load("res://Shared/Audio/Music/gemheart_default_bg_music_loopable.mp3") as AudioStream
 	if audio_stream is AudioStreamMP3:  # Ensure it’s an AudioStream with a loop property
 		audio_stream.loop = true
 	
 	bg_music.stream = audio_stream
-	bg_music.volume_db = -20  # Adjust volume
+	bg_music.volume_db = -50  # Start with a very low volume
 	bg_music.play()
-
+	
+	# Fade in music
+	var tween = create_tween()  # New Tween in Godot 4
+	tween.tween_property(bg_music, "volume_db", -30, 0.33)  # Fade to -30 dB over 2 seconds
+	tween.play()
 
 # Ensure all necessary checks are made so the game is in a valid state
 # for the next player to take their turn.
