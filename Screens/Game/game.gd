@@ -2,7 +2,7 @@ extends Node
 
 @onready var nDeck     = $PlayerNorth/Deck
 @onready var sDeck     = $PlayerSouth/Deck
-@onready var card_load     = load("res://Shared/card.tscn")
+@onready var card_load = load("res://Shared/card.tscn")
 @onready var action_button = $Board/ActionButton
 @onready var nHealth   = $PlayerNorth/HealthNorth
 @onready var sHealth   = $PlayerSouth/HealthSouth
@@ -11,15 +11,20 @@ extends Node
 @onready var nHand     = $PlayerNorth/Hand
 @onready var sHand     = $PlayerSouth/Hand
 const STARTING_HEALTH  = 20
+const STARTING_RESOURCE = 5
 
 # TODO: Turn this into a rand() modulo
 var current_player: String = "PlayerNorth"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var json_as_dict
+	
 	# Initiate
 	init_board_values()
 	init_music()
+	json_as_dict = read_json(json_as_dict)
+	extract_json_value(json_as_dict)
 	
 	# Start the first player's turn
 	for child in get_children():
@@ -38,6 +43,26 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func read_json(json_as_dict):
+	var file = "res://Cards/all_cards.json"
+	var json_as_text = FileAccess.get_file_as_string(file)
+	json_as_dict = JSON.parse_string(json_as_text)
+	return json_as_dict
+
+func extract_json_value(json_as_dict):
+	if "all_cards" in json_as_dict:
+		# Access the card by its key, e.g., "card_two"
+		var target_key = "card_one"
+		if target_key in json_as_dict["all_cards"]:
+			var card = json_as_dict["all_cards"][target_key]
+			var cost = card.get("cost", "Cost not found")
+			print("The cost of ", target_key, " is: ", cost)
+		else:
+				print("Card with key ", target_key, " not found.")
+
+func generate_card():
+	pass
+
 func init_board_values() -> void:
 	# Set the player health displays
 	nHealth.text = str(STARTING_HEALTH)
@@ -45,8 +70,8 @@ func init_board_values() -> void:
 	# Set the action button's text
 	action_button.text = "Player North's turn"
 	# Set resource values
-	nResource.text = "1...2...3"
-	sResource.text = "1...2...3"
+	nResource.text = str(STARTING_RESOURCE)
+	sResource.text = str(STARTING_RESOURCE)
 
 func init_music() -> void:
 	var bg_music = AudioStreamPlayer.new()
@@ -63,7 +88,7 @@ func init_music() -> void:
 	
 	# Fade in music
 	var tween = create_tween()  # New Tween in Godot 4
-	tween.tween_property(bg_music, "volume_db", -30, 0.33)  # Fade to -30 dB over 2 seconds
+	tween.tween_property(bg_music, "volume_db", -30, 0.33)  # Fade to -30 dB over 0.33 seconds
 	tween.play()
 
 # Ensure all necessary checks are made so the game is in a valid state

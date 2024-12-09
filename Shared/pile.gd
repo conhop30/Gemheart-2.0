@@ -20,9 +20,10 @@ var DECK_SIZE = 40
 
 """ METHODS """
 func _ready() -> void:
-	print("Pile's global_position in _ready:", global_position)
-	print("Pile's global_transform.origin in _ready:", global_transform.origin)
-	print("Pile's name is", name)
+	#print("Pile's global_position in _ready:", global_position)
+	#print("Pile's global_transform.origin in _ready:", global_transform.origin)
+	#print("Pile's name is", name)
+	pass
 
 func _process(delta: float) -> void:
 	pass
@@ -32,6 +33,7 @@ func init_pile():
 	
 	for cards in range(0, DECK_SIZE, 1):
 		var card = card_scene.instantiate()
+		card.set_cost(300);
 		add_card_to_pile(card)
 		card.position = start_position# + offset * cards
 	#var offset = Vector2(50, 0)
@@ -44,12 +46,10 @@ func add_card_to_pile(card: Sprite2D):
 	if can_accept_card(card):
 		add_child(card)
 		card.set_pile(self.name)
-		print("Added card:", card.name, "to pile:", self.name)
-		print("card.position = " + str(card.position))
+		#print("Added card:", card.name, "to pile:", self.name)
+		#print("card.position = " + str(card.position))
 		# TODO: Reposition all cards in pile to proper formatting
 		arrange_cards()
-	else:
-		print("Pile:", self.name, "cannot accept card:", card.name)
 
 func arrange_cards():
 	var current_pos = self.global_position

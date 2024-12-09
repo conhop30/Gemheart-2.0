@@ -73,6 +73,7 @@ script = ExtResource("3_5beh6")
 [node name="Bench" type="Area2D" parent="PlayerNorth"]
 position = Vector2(444, 81)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Bench"]
@@ -82,6 +83,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="Ramp" type="Area2D" parent="PlayerNorth"]
 position = Vector2(446, 180)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Ramp"]
@@ -91,6 +93,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="RampEco" type="Area2D" parent="PlayerNorth"]
 position = Vector2(1076, 177)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/RampEco"]
@@ -110,6 +113,7 @@ shape = SubResource("RectangleShape2D_1ukit")
 [node name="Ground" type="Area2D" parent="PlayerNorth"]
 position = Vector2(374, 295)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Ground"]
@@ -124,8 +128,9 @@ anchor_right = 0.85
 anchor_bottom = 0.183
 offset_left = 769.0
 offset_top = 32.0
-offset_right = 934.0
-offset_bottom = 55.0
+offset_right = 977.0
+offset_bottom = 124.0
+theme_override_font_sizes/font_size = 32
 text = "DEFAULT RESOURCES"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -147,6 +152,7 @@ vertical_alignment = 1
 [node name="GroundEco" type="Area2D" parent="PlayerNorth"]
 position = Vector2(874, 357)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/GroundEco"]
@@ -156,6 +162,7 @@ shape = SubResource("RectangleShape2D_6253t")
 [node name="Hand" type="Area2D" parent="PlayerNorth"]
 position = Vector2(191, -29)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Hand"]
@@ -169,6 +176,7 @@ script = ExtResource("3_5beh6")
 [node name="Bench" type="Area2D" parent="PlayerSouth"]
 position = Vector2(445, 567)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Bench"]
@@ -177,6 +185,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="Ramp" type="Area2D" parent="PlayerSouth"]
 position = Vector2(446, 476)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Ramp"]
@@ -186,6 +195,7 @@ shape = SubResource("RectangleShape2D_bqk7p")
 [node name="RampEco" type="Area2D" parent="PlayerSouth"]
 position = Vector2(1077, 476)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/RampEco"]
@@ -205,6 +215,7 @@ shape = SubResource("RectangleShape2D_1ukit")
 [node name="Ground" type="Area2D" parent="PlayerSouth"]
 position = Vector2(374, 399)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Ground"]
@@ -219,8 +230,9 @@ anchor_right = 0.848
 anchor_bottom = 0.937
 offset_left = 767.0
 offset_top = 522.0
-offset_right = 932.0
-offset_bottom = 545.0
+offset_right = 985.0
+offset_bottom = 620.0
+theme_override_font_sizes/font_size = 32
 text = "DEFAULT RESOURCES"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -242,6 +254,7 @@ vertical_alignment = 1
 [node name="GroundEco" type="Area2D" parent="PlayerSouth"]
 position = Vector2(875, 258)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/GroundEco"]
@@ -251,6 +264,7 @@ shape = SubResource("RectangleShape2D_6253t")
 [node name="Hand" type="Area2D" parent="PlayerSouth"]
 position = Vector2(190, 608)
 script = ExtResource("4_eqtxn")
+isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Hand"]
