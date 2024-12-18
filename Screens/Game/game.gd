@@ -25,6 +25,7 @@ func _ready() -> void:
 	init_music()
 	json_as_dict = read_json(json_as_dict)
 	extract_json_value(json_as_dict)
+	$Settings.hide()
 	
 	# Start the first player's turn
 	for child in get_children():
@@ -140,3 +141,10 @@ func current_player_turn() ->  void:
 # Reports if a player's health dropped to 0 or less
 func has_died() -> bool:
 	return false
+
+
+func _on_settings_button_pressed() -> void:
+	if $Settings.visible:
+		$Settings.hide()
+	else:
+		$Settings.show()
