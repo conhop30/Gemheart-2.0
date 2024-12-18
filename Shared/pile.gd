@@ -17,6 +17,7 @@ var DECK_SIZE = 40
 """ ATTRIBUTES """
 @onready var collision_shape = $CollisionShape2D
 @onready var card_scene = load("res://Shared/card.tscn")
+@onready var card_back  = load("res://card_back.tscn")
 
 """ METHODS """
 func _ready() -> void:
@@ -33,7 +34,7 @@ func init_pile():
 	
 	for cards in range(0, DECK_SIZE, 1):
 		var card = card_scene.instantiate()
-		card.set_cost(300);
+		card.set_cost(45);
 		add_card_to_pile(card)
 		card.position = start_position# + offset * cards
 	#var offset = Vector2(50, 0)

@@ -7,12 +7,11 @@ extends Node2D
 class_name Player
 
 # References to the child nodes representing each pile
-@onready var bench  = $Bench
-@onready var ramp   = $Ramp
-@onready var ground = $Ground
-@onready var deck   = $Deck
-@onready var hand   = $Hand
-@onready var rampEco   = $RampEco
+@onready var deck  = $Deck
+@onready var hand  = $Hand
+@onready var bench = $Bench
+@onready var benchEco  = $BenchEco
+@onready var ground    = $Ground
 @onready var groundEco = $GroundEco
 
 var selected_card = null  # Store the currently selected card
@@ -101,7 +100,7 @@ func on_mouse_up():
 # TODO: Resolve pile recognition so that players can cross onto other's territory
 func _get_pile_at_position(position: Vector2) -> Node:
 	# Iterate over each pile and check if the card overlaps it
-	for pile in [deck, hand, bench, ramp, ground, groundEco, rampEco]:
+	for pile in [deck, hand, bench, benchEco, ground, groundEco]:
 		if pile.get_global_rect().has_point(position):
 			return pile
 	return null

@@ -1,83 +1,45 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtdnt1xygw6sn"]
 
-[ext_resource type="Texture2D" uid="uid://86qun3nm1xbd" path="res://Assets/square.png" id="1_h4xa8"]
+[ext_resource type="Texture2D" uid="uid://c4sl7s1p83kvd" path="res://Assets/card_blank.png" id="1_qao02"]
 [ext_resource type="Texture2D" uid="uid://bdppik812egxs" path="res://Assets/icon.svg" id="2_jr6wx"]
 [ext_resource type="Script" path="res://Shared/card.gd" id="2_kux7b"]
-[ext_resource type="Texture2D" uid="uid://dfuqp38ykcox2" path="res://Assets/circle.png" id="3_g3wp0"]
+[ext_resource type="PackedScene" uid="uid://dueshtd03mwok" path="res://Assets/card_back.tscn" id="3_byk08"]
 
 [node name="Card" type="Sprite2D"]
 top_level = true
-position = Vector2(66.0001, 566)
-scale = Vector2(0.16125, 0.179308)
-texture = ExtResource("1_h4xa8")
+position = Vector2(133.678, 547.727)
+scale = Vector2(0.363295, 0.327842)
+texture = ExtResource("1_qao02")
 script = ExtResource("2_kux7b")
-metadata/_edit_group_ = true
+
+[node name="CardBack" parent="." instance=ExtResource("3_byk08")]
+position = Vector2(251.371, 0.834171)
+scale = Vector2(0.477341, 0.76795)
 
 [node name="Art" type="TextureRect" parent="."]
 anchors_preset = -1
-anchor_left = 0.028
-anchor_top = 0.024
-anchor_right = 0.972
-anchor_bottom = 0.48
-offset_left = -250.0
-offset_top = -250.0
-offset_right = -250.0
-offset_bottom = -250.0
+anchor_left = 0.012
+anchor_top = 0.13
+anchor_right = 0.988
+anchor_bottom = 0.891
+offset_left = -121.928
+offset_top = -193.18
+offset_right = -122.072
+offset_bottom = -193.926
 texture = ExtResource("2_jr6wx")
-
-[node name="PowerBorder" type="TextureRect" parent="."]
-modulate = Color(0.0156863, 0.0313726, 1, 1)
-anchors_preset = -1
-anchor_left = -0.003
-anchor_top = 0.824
-anchor_right = 0.241
-anchor_bottom = 0.998
-offset_left = -249.974
-offset_top = -249.897
-offset_right = -249.974
-offset_bottom = -249.897
-texture = ExtResource("1_h4xa8")
-expand_mode = 1
-
-[node name="HealthBorder" type="TextureRect" parent="."]
-modulate = Color(1, 0.0470588, 0, 1)
-anchors_preset = -1
-anchor_left = 0.751
-anchor_top = 0.824
-anchor_right = 0.995
-anchor_bottom = 0.998
-offset_left = -249.763
-offset_top = -249.897
-offset_right = -249.763
-offset_bottom = -249.897
-texture = ExtResource("1_h4xa8")
-expand_mode = 1
-
-[node name="CostBorder" type="TextureRect" parent="."]
-modulate = Color(1, 0.745098, 0, 1)
-anchors_preset = -1
-anchor_left = -0.019
-anchor_right = 0.193
-anchor_bottom = 0.149
-offset_left = -249.832
-offset_top = -254.279
-offset_right = -249.832
-offset_bottom = -249.779
-texture = ExtResource("3_g3wp0")
-expand_mode = 1
 
 [node name="Name" type="Label" parent="."]
 modulate = Color(0, 1, 0, 1)
 anchors_preset = -1
-anchor_left = 0.162
-anchor_top = 0.462
-anchor_right = 0.846
-anchor_bottom = 0.596
-offset_left = -249.959
-offset_top = -250.071
-offset_right = -253.959
-offset_bottom = -250.071
-theme_override_font_sizes/font_size = 48
+anchor_left = 0.115
+anchor_top = 0.514
+anchor_right = 0.914
+anchor_bottom = 0.644
+offset_left = -122.119
+offset_top = -192.818
+offset_right = -122.075
+offset_bottom = -192.998
+theme_override_font_sizes/font_size = 36
 text = "Card Name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -89,39 +51,39 @@ anchor_left = 0.06
 anchor_top = 0.596
 anchor_right = 0.948
 anchor_bottom = 0.812
-offset_left = -250.0
-offset_top = -250.0
-offset_right = -250.0
-offset_bottom = -250.0
+offset_left = -123.64
+offset_top = -180.056
+offset_right = -112.312
+offset_bottom = -166.432
+theme_override_font_sizes/font_size = 12
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisi nisi, suscipit sit amet enim eget, pretium porttitor eros. Nulla eget odio at magna tempus ultrices."
 autowrap_mode = 3
 
 [node name="Power" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.012
-anchor_top = 0.824
-anchor_right = 0.232
-anchor_bottom = 0.984
-offset_left = -250.0
-offset_top = -250.0
-offset_right = -250.0
-offset_bottom = -250.0
-theme_override_font_sizes/font_size = 48
+anchor_top = 0.873
+anchor_right = 0.189
+anchor_bottom = 1.003
+offset_left = -120.0
+offset_top = -192.978
+offset_right = -122.116
+offset_bottom = -193.158
+theme_override_font_sizes/font_size = 36
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Health" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.767
-anchor_top = 0.831
-anchor_right = 0.987
-anchor_bottom = 0.991
-offset_left = -249.905
-offset_top = -250.219
-offset_right = -249.905
-offset_bottom = -250.219
-theme_override_font_sizes/font_size = 48
+anchor_left = 0.797
+anchor_top = 0.874
+anchor_right = 0.998
+anchor_bottom = 1.003
+offset_left = -122.014
+offset_top = -193.168
+offset_right = -122.058
+offset_bottom = -192.962
+theme_override_font_sizes/font_size = 36
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -132,10 +94,11 @@ anchor_left = 0.028
 anchor_top = -0.002
 anchor_right = 0.146
 anchor_bottom = 0.132
-offset_left = -254.0
-offset_top = -250.0
-offset_right = -250.0
-offset_bottom = -250.0
+offset_left = -121.554
+offset_top = -205.811
+offset_right = -117.554
+offset_bottom = -190.535
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "1"
 horizontal_alignment = 1

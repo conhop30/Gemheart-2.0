@@ -52,7 +52,7 @@ func read_json(json_as_dict):
 func extract_json_value(json_as_dict):
 	if "all_cards" in json_as_dict:
 		# Access the card by its key, e.g., "card_two"
-		var target_key = "card_one"
+		var target_key = "card_two"
 		if target_key in json_as_dict["all_cards"]:
 			var card = json_as_dict["all_cards"][target_key]
 			var cost = card.get("cost", "Cost not found")
@@ -60,7 +60,7 @@ func extract_json_value(json_as_dict):
 		else:
 				print("Card with key ", target_key, " not found.")
 
-func generate_card():
+func populate_card():
 	pass
 
 func init_board_values() -> void:

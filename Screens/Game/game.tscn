@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bw7puf3jsxgly"]
+[gd_scene load_steps=15 format=3 uid="uid://bw7puf3jsxgly"]
 
 [ext_resource type="Script" path="res://Screens/Game/game.gd" id="1_tm6v3"]
-[ext_resource type="Texture2D" uid="uid://d0iwobl2gc1r1" path="res://Assets/gemheartBoardBeta.png" id="2_e1c7f"]
+[ext_resource type="Texture2D" uid="uid://bpgmxagb6ch72" path="res://Assets/Gemheart General Overview (2).png" id="2_b5bxi"]
 [ext_resource type="Script" path="res://Shared/player.gd" id="3_5beh6"]
 [ext_resource type="Script" path="res://Screens/Game/action_button.gd" id="3_kaue4"]
 [ext_resource type="Texture2D" uid="uid://c02dequ70f1ir" path="res://Assets/action_button.PNG" id="4_3oe2m"]
@@ -12,19 +12,22 @@
 draw_center = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqk7p"]
-size = Vector2(612, 83)
+size = Vector2(562, 93.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ukit"]
 size = Vector2(97, 86)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gp6g"]
-size = Vector2(614.5, 95)
+size = Vector2(557.5, 131)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6253t"]
-size = Vector2(208, 94)
+size = Vector2(238, 135)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvgnv"]
-size = Vector2(841, 70)
+size = Vector2(559.25, 52.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihp7f"]
+size = Vector2(234, 92)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_tm6v3")
@@ -40,9 +43,12 @@ offset_bottom = 2.0
 layout_mode = 2
 anchor_right = 0.997
 anchor_bottom = 0.998
-offset_right = -0.538086
-offset_bottom = 0.299988
-texture = ExtResource("2_e1c7f")
+offset_left = -23.0
+offset_top = -16.0
+offset_right = 66.4622
+offset_bottom = 13.3
+texture = ExtResource("2_b5bxi")
+expand_mode = 1
 
 [node name="ActionButton" type="Button" parent="Board"]
 self_modulate = Color(0, 0, 0, 1)
@@ -52,10 +58,10 @@ anchor_left = 0.89
 anchor_top = 0.406
 anchor_right = 0.969
 anchor_bottom = 0.54
-offset_left = -0.280029
-offset_top = -0.0880127
-offset_right = -0.288086
-offset_bottom = 0.0799866
+offset_left = -3.05981
+offset_top = 16.1
+offset_right = -3.06787
+offset_bottom = 16.268
 theme_override_styles/normal = SubResource("StyleBoxFlat_2r4w7")
 text = "DEFAULT TEXT"
 autowrap_mode = 3
@@ -63,7 +69,7 @@ script = ExtResource("3_kaue4")
 
 [node name="ActionButton" type="Sprite2D" parent="Board/ActionButton"]
 show_behind_parent = true
-position = Vector2(38.2202, 42.188)
+position = Vector2(46, 42)
 scale = Vector2(0.154297, 0.138184)
 texture = ExtResource("4_3oe2m")
 
@@ -71,37 +77,16 @@ texture = ExtResource("4_3oe2m")
 script = ExtResource("3_5beh6")
 
 [node name="Bench" type="Area2D" parent="PlayerNorth"]
-position = Vector2(444, 81)
+position = Vector2(476, 112)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Bench"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="Ramp" type="Area2D" parent="PlayerNorth"]
-position = Vector2(446, 180)
-script = ExtResource("4_eqtxn")
-isStacked = null
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Ramp"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="RampEco" type="Area2D" parent="PlayerNorth"]
-position = Vector2(1076, 177)
-script = ExtResource("4_eqtxn")
-isStacked = null
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/RampEco"]
-position = Vector2(1, -5.5)
+position = Vector2(-28, -1.5)
 shape = SubResource("RectangleShape2D_bqk7p")
 
 [node name="Deck" type="Area2D" parent="PlayerNorth"]
-position = Vector2(65, 70)
+position = Vector2(77, 62)
 script = ExtResource("4_eqtxn")
 isStacked = true
 metadata/_edit_group_ = true
@@ -111,13 +96,12 @@ position = Vector2(3.5, 4)
 shape = SubResource("RectangleShape2D_1ukit")
 
 [node name="Ground" type="Area2D" parent="PlayerNorth"]
-position = Vector2(374, 295)
+position = Vector2(449, 225)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Ground"]
-position = Vector2(72.75, -27.5)
+position = Vector2(-2, 9)
 shape = SubResource("RectangleShape2D_6gp6g")
 
 [node name="ResourcesNorth" type="Label" parent="PlayerNorth"]
@@ -126,11 +110,10 @@ anchor_left = 0.666
 anchor_top = 0.049
 anchor_right = 0.85
 anchor_bottom = 0.183
-offset_left = 769.0
-offset_top = 32.0
-offset_right = 977.0
-offset_bottom = 124.0
-theme_override_font_sizes/font_size = 32
+offset_left = 741.0
+offset_right = 989.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 16
 text = "DEFAULT RESOURCES"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -141,18 +124,17 @@ anchor_left = 0.039
 anchor_top = 0.378
 anchor_right = 0.085
 anchor_bottom = 0.457
-offset_left = 59.0
-offset_top = 257.0
-offset_right = 78.0
-offset_bottom = 280.0
+offset_left = 46.0
+offset_top = 231.0
+offset_right = 110.0
+offset_bottom = 290.0
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GroundEco" type="Area2D" parent="PlayerNorth"]
-position = Vector2(874, 357)
+position = Vector2(866, 399)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/GroundEco"]
@@ -160,50 +142,38 @@ position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_6253t")
 
 [node name="Hand" type="Area2D" parent="PlayerNorth"]
-position = Vector2(191, -29)
+position = Vector2(440, 25)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/Hand"]
-position = Vector2(367.5, 23)
+position = Vector2(8, 4)
 shape = SubResource("RectangleShape2D_dvgnv")
+
+[node name="BenchEco" type="Area2D" parent="PlayerNorth"]
+position = Vector2(867, 104)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNorth/BenchEco"]
+position = Vector2(-2, 6)
+shape = SubResource("RectangleShape2D_ihp7f")
 
 [node name="PlayerSouth" type="Node2D" parent="."]
 position = Vector2(0, 1)
 script = ExtResource("3_5beh6")
 
 [node name="Bench" type="Area2D" parent="PlayerSouth"]
-position = Vector2(445, 567)
+position = Vector2(444, 533)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Bench"]
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="Ramp" type="Area2D" parent="PlayerSouth"]
-position = Vector2(446, 476)
-script = ExtResource("4_eqtxn")
-isStacked = null
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Ramp"]
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_bqk7p")
-
-[node name="RampEco" type="Area2D" parent="PlayerSouth"]
-position = Vector2(1077, 476)
-script = ExtResource("4_eqtxn")
-isStacked = null
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/RampEco"]
-position = Vector2(1, -5.5)
+position = Vector2(2, 0.25)
 shape = SubResource("RectangleShape2D_bqk7p")
 
 [node name="Deck" type="Area2D" parent="PlayerSouth"]
-position = Vector2(60, 558)
+position = Vector2(79, 568)
 script = ExtResource("4_eqtxn")
 isStacked = true
 metadata/_edit_group_ = true
@@ -213,13 +183,12 @@ position = Vector2(3.5, 4)
 shape = SubResource("RectangleShape2D_1ukit")
 
 [node name="Ground" type="Area2D" parent="PlayerSouth"]
-position = Vector2(374, 399)
+position = Vector2(458, 407)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Ground"]
-position = Vector2(72.75, -27.5)
+position = Vector2(-8, 5)
 shape = SubResource("RectangleShape2D_6gp6g")
 
 [node name="ResourcesSouth" type="Label" parent="PlayerSouth"]
@@ -228,11 +197,11 @@ anchor_left = 0.666
 anchor_top = 0.803
 anchor_right = 0.848
 anchor_bottom = 0.937
-offset_left = 767.0
-offset_top = 522.0
-offset_right = 985.0
-offset_bottom = 620.0
-theme_override_font_sizes/font_size = 32
+offset_left = 745.0
+offset_top = 587.0
+offset_right = 988.0
+offset_bottom = 643.0
+theme_override_font_sizes/font_size = 16
 text = "DEFAULT RESOURCES"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -243,33 +212,40 @@ anchor_left = 0.034
 anchor_top = 0.526
 anchor_right = 0.08
 anchor_bottom = 0.605
-offset_left = 58.0
-offset_top = 349.0
-offset_right = 77.0
-offset_bottom = 372.0
+offset_left = 42.0
+offset_top = 350.0
+offset_right = 103.0
+offset_bottom = 413.0
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GroundEco" type="Area2D" parent="PlayerSouth"]
-position = Vector2(875, 258)
+position = Vector2(863, 236)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/GroundEco"]
-position = Vector2(0, 13)
+position = Vector2(3, -1)
 shape = SubResource("RectangleShape2D_6253t")
 
 [node name="Hand" type="Area2D" parent="PlayerSouth"]
-position = Vector2(190, 608)
+position = Vector2(445, 616)
 script = ExtResource("4_eqtxn")
-isStacked = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/Hand"]
-position = Vector2(368.25, 43.5)
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_dvgnv")
+
+[node name="BenchEco" type="Area2D" parent="PlayerSouth"]
+position = Vector2(865, 533)
+script = ExtResource("4_eqtxn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSouth/BenchEco"]
+position = Vector2(-1, 3)
+shape = SubResource("RectangleShape2D_ihp7f")
 
 [node name="Settings" type="Control" parent="."]
 layout_mode = 3

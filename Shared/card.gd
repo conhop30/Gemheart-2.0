@@ -11,6 +11,7 @@ class_name Card
 
 const Keywords = preload("res://Shared/keywords.gd")
 const Sources  = preload("res://Shared/sources.gd" )
+const Art      = preload("res://Assets/icon.svg")
 
 """ ATTRIBUTES """
 var _playerID    = 0
@@ -19,7 +20,7 @@ var _description = "Default description text."
 var _keywords = Keywords.Keywords.EMPTY
 var _source   = Sources.Sources.NONE
 var _effect   # Effect
-var _art      # Generated in _ready()
+var _art      = Art
 var _pile  = "Deck"
 var _piles = ["Deck"]
 
@@ -37,6 +38,12 @@ func set_keywords(new_keywords):
 	_keywords = new_keywords
 func set_pile(new_pile):
 	_pile = new_pile
+func set_card_name(new_name): # Abnormal name due to engine warning
+	_name = new_name
+func set_description(new_description):
+	_description = new_description
+func set_art(new_art):
+	_art = new_art
 
 # Called when the node enters the scene tree for the first time.
 # TODO - QUESTION: Would this act as a constructor?
@@ -49,6 +56,10 @@ func _process(delta: float) -> void:
 	pass
 
 func init_card():
+	set_cost(11)
+	set_health(22)
+	set_keywords(Keywords.Keywords.EMPTY)
+	set_power(0)
 	pass
 
 func possible_piles():
@@ -68,14 +79,14 @@ func effect():
 	
 func start_dragging():
 	if _pile == "Deck":
-		_piles = ["Hand", "Bench"]
+		_piles = ["Hand"]
 	elif _pile == "Hand":
 		_piles = ["Bench"]
 	elif _pile == "Bench":
-		_piles = ["Ramp", "RampEco"]
-	elif _pile == "Ramp":
-		_piles = ["Bench", "Ground", "RampEco"]
-	elif _pile == "RampEco":
-		_piles = ["Ground", "Ramp", "Bench"]
+		_piles = ["BenchEco", "Ground", "GroundEco"]
+	elif _pile == "BenchEco":
+		_piles = ["Bench", "Ground", "GroundEco"]
 	elif _pile == "Ground":
-		_piles = ["GroundEco", "Ramp"]
+		_piles = ["GroundEco", "BenchEco", "Bench"]
+	elif _pile == "GroundEco":
+		_piles = ["Ground", "BenchEco", "Bench"]
