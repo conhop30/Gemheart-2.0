@@ -1,13 +1,17 @@
 extends Node
 
+# Other scripts
+var reader = preload("res://reader.gd").new()
+
+# Attributes
 @onready var nDeck     = $PlayerNorth/Deck
 @onready var sDeck     = $PlayerSouth/Deck
 @onready var card_load = load("res://Shared/card.tscn")
 @onready var action_button = $Board/ActionButton
 @onready var nHealth   = $PlayerNorth/HealthNorth
 @onready var sHealth   = $PlayerSouth/HealthSouth
-@onready var nResource = $PlayerNorth/ResourcesNorth
-@onready var sResource = $PlayerSouth/ResourcesSouth
+@onready var nResource = $PlayerNorth/ResourcesNorth/Amount
+@onready var sResource = $PlayerSouth/ResourcesSouth/Amount
 @onready var nHand     = $PlayerNorth/Hand
 @onready var sHand     = $PlayerSouth/Hand
 const STARTING_HEALTH  = 20
@@ -23,8 +27,8 @@ func _ready() -> void:
 	# Initiate
 	init_board_values()
 	init_music()
-	json_as_dict = read_json(json_as_dict)
-	extract_json_value(json_as_dict)
+	json_as_dict = reader.read_json(json_as_dict)
+	reader.extract_json_value(json_as_dict)
 	$Settings.hide()
 	
 	# Start the first player's turn
@@ -40,29 +44,15 @@ func _ready() -> void:
 	# more setup code for signals
 	EventBus.subscribe("player_passed", self, "on_turn_passed")
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-func read_json(json_as_dict):
-	var file = "res://Cards/all_cards.json"
-	var json_as_text = FileAccess.get_file_as_string(file)
-	json_as_dict = JSON.parse_string(json_as_text)
-	return json_as_dict
-
-func extract_json_value(json_as_dict):
-	if "all_cards" in json_as_dict:
-		# Access the card by its key, e.g., "card_two"
-		var target_key = "card_two"
-		if target_key in json_as_dict["all_cards"]:
-			var card = json_as_dict["all_cards"][target_key]
-			var cost = card.get("cost", "Cost not found")
-			print("The cost of ", target_key, " is: ", cost)
-		else:
-				print("Card with key ", target_key, " not found.")
+	
 
 func populate_card():
 	pass
+
 
 func init_board_values() -> void:
 	# Set the player health displays
@@ -73,6 +63,7 @@ func init_board_values() -> void:
 	# Set resource values
 	nResource.text = str(STARTING_RESOURCE)
 	sResource.text = str(STARTING_RESOURCE)
+
 
 func init_music() -> void:
 	var bg_music = AudioStreamPlayer.new()
@@ -92,6 +83,7 @@ func init_music() -> void:
 	tween.tween_property(bg_music, "volume_db", -30, 0.33)  # Fade to -30 dB over 0.33 seconds
 	tween.play()
 
+
 # Ensure all necessary checks are made so the game is in a valid state
 # for the next player to take their turn.
 func on_turn_committed() -> void:
@@ -101,6 +93,7 @@ func on_turn_committed() -> void:
 	# Subtract any spent resource, if any
 	# Set player active status
 	pass
+
 
 func on_turn_passed() -> void:
 	# Toggle the current player
@@ -127,16 +120,20 @@ func on_round_start() -> void:
 	# Set player active status (who starts the round)
 	pass
 
+
 func on_round_end() -> void:
 	pass
+
 
 # The player doesn't have enough resources to do something
 func too_expensive() -> void:
 	pass
 
+
 # Validates that an attempted action was done by the active player
 func current_player_turn() ->  void:
 	pass
+
 
 # Reports if a player's health dropped to 0 or less
 func has_died() -> bool:

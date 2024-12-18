@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxkvsymv5xt0n"]
+[gd_scene load_steps=6 format=3 uid="uid://dxkvsymv5xt0n"]
 
 [ext_resource type="Script" path="res://Screens/Launch/launch.gd" id="1_1l10h"]
 [ext_resource type="Texture2D" uid="uid://cdupm085mmoxn" path="res://Screens/Launch/gemheartMain.png" id="2_ugqp7"]
 [ext_resource type="Texture2D" uid="uid://d2f2nmq16h4a5" path="res://Assets/filler.jpg" id="3_pg18k"]
+[ext_resource type="Texture2D" uid="uid://bdppik812egxs" path="res://Assets/icon.svg" id="4_u4v1g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_phk0w"]
 
 [node name="Launch" type="Control"]
 layout_mode = 3
@@ -18,20 +21,36 @@ position = Vector2(601, 401)
 scale = Vector2(0.623535, 0.497559)
 texture = ExtResource("2_ugqp7")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Background"]
+sprite_frames = SubResource("SpriteFrames_phk0w")
+
 [node name="Play" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.379
-anchor_top = 0.75
-anchor_right = 0.637
-anchor_bottom = 0.966
-offset_left = 0.391998
-offset_top = -3.05176e-05
-offset_right = 0.175964
-offset_bottom = 0.0319824
-grow_horizontal = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -159.0
+offset_right = 318.0
 grow_vertical = 0
 texture_normal = ExtResource("3_pg18k")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Play"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.032
+anchor_top = 0.71
+anchor_right = 0.31
+anchor_bottom = 0.98
+offset_left = -11.176
+offset_top = -122.89
+offset_right = 209.42
+offset_bottom = 9.17999
+theme_override_colors/font_color = Color(1, 0.443137, 0, 1)
+theme_override_font_sizes/font_size = 128
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -68,21 +87,40 @@ text = "In Development"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayLabel" type="Label" parent="."]
+[node name="Quit" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.371
-anchor_top = 0.71
-anchor_right = 0.645
-anchor_bottom = 0.98
-offset_left = -4.39203
-offset_top = -0.0800171
-offset_right = -0.0400391
-offset_bottom = -0.0400391
-theme_override_colors/font_color = Color(1, 0.443137, 0, 1)
-theme_override_font_sizes/font_size = 128
-text = "PLAY"
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -155.0
+offset_right = -128.0
+offset_bottom = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2, 1.2)
+texture_normal = ExtResource("4_u4v1g")
+
+[node name="Label" type="Label" parent="Quit"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -121.5
+offset_top = -113.0
+offset_right = -6.5
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "QUIT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

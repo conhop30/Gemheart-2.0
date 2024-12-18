@@ -21,3 +21,7 @@ func _on_play_pressed() -> void:
 	
 	# Next screen, the home page
 	get_tree().change_scene_to_file("res://Screens/Home/home.tscn")
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()

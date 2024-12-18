@@ -18,3 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 EventBus="*res://Shared/event_bus.gd"
+
+[display]
+
+window/stretch/mode="viewport"
